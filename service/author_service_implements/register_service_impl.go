@@ -6,17 +6,17 @@ import (
 	"github.com/gin-backend-application/service"
 )
 
-type authorRegisteringServiceImpl struct {
+type authorRegisterServiceImpl struct {
 	authorRepo repository.AuthorRepository
 }
 
-func NewAuthorRegisteringService(authorRepo repository.AuthorRepository) service.AuthorRegisteringService {
-	return &authorRegisteringServiceImpl{
+func NewAuthorRegisterService(authorRepo repository.AuthorRepository) service.AuthorRegisterService {
+	return &authorRegisterServiceImpl{
 		authorRepo: authorRepo,
 	}
 }
 
-func (a *authorRegisteringServiceImpl) RegisterNewAuthor(authorInfo model.Author) (model.Author, error) {
+func (a *authorRegisterServiceImpl) RegisterNewAuthor(authorInfo model.Author) (model.Author, error) {
 	author, err := a.authorRepo.SaveNew(authorInfo)
 	if err != nil {
 		return model.Author{}, err

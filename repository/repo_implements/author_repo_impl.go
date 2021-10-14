@@ -11,8 +11,10 @@ type authorRepoImpl struct {
 	authors []*model.Author	// simulates the database
 }
 
-func NewAuthorRepo() repository.AuthorRepository{
-	return &authorRepoImpl{}
+func NewAuthorRepo(authors []*model.Author) repository.AuthorRepository{
+	return &authorRepoImpl{
+		authors: authors,
+	}
 }
 
 func (a *authorRepoImpl) FindById(id uint64) (model.Author, error) {

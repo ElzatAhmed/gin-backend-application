@@ -10,7 +10,7 @@ type bookUpdatingServiceImpl struct {
 	bookRepo repository.BookRepository
 }
 
-func NewBookUpdatingService(bookRepo repository.BookRepository) service.BookUpdatingService {
+func NewBookUpdateService(bookRepo repository.BookRepository) service.BookUpdateService {
 	return &bookUpdatingServiceImpl{
 		bookRepo: bookRepo,
 	}

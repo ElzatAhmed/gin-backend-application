@@ -11,8 +11,10 @@ type bookRepoImpl struct {
 	books []*model.Book
 }
 
-func NewBookRepo() repository.BookRepository {
-	return &bookRepoImpl{}
+func NewBookRepo(books []*model.Book) repository.BookRepository {
+	return &bookRepoImpl{
+		books: books,
+	}
 }
 
 func (b *bookRepoImpl) FindById(id uint64) (model.Book,error) {

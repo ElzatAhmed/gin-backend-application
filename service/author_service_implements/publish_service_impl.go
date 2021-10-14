@@ -6,20 +6,20 @@ import (
 	"github.com/gin-backend-application/service"
 )
 
-type authorPublishingServiceImpl struct {
+type authorPublishServiceImpl struct {
 	authorRepo repository.AuthorRepository
 	bookRepo repository.BookRepository
 }
 
-func NewAuthorPublishingService(authorRepo repository.AuthorRepository,
-	bookRepo repository.BookRepository) service.AuthorPublishingService {
-	return &authorPublishingServiceImpl{
+func NewAuthorPublishService(authorRepo repository.AuthorRepository,
+	bookRepo repository.BookRepository) service.AuthorPublishService {
+	return &authorPublishServiceImpl{
 		authorRepo: authorRepo,
 		bookRepo:   bookRepo,
 	}
 }
 
-func (a *authorPublishingServiceImpl) PublishNewBook(authorId uint64,
+func (a *authorPublishServiceImpl) PublishNewBook(authorId uint64,
 	bookInfo model.Book) (model.Book, error) {
 	_, err := a.authorRepo.FindById(authorId)
 	if err != nil {

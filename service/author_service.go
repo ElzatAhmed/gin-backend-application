@@ -11,11 +11,11 @@ type AuthorInfoService interface {
 	UpdateInfoById(id uint64, newInfo model.Author) (model.Author,error)
 }
 
-type AuthorPublishingService interface {
+type AuthorPublishService interface {
 	PublishNewBook(authorId uint64, bookInfo model.Book) (model.Book, error)
 }
 
-type AuthorRegisteringService interface {
+type AuthorRegisterService interface {
 	RegisterNewAuthor(authorInfo model.Author) (model.Author, error)
 }
 

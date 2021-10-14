@@ -9,6 +9,6 @@ type BookInfoService interface {
 	FindAllByAuthorName(authorName string) ([]model.Book, error)
 }
 
-type BookUpdatingService interface {
+type BookUpdateService interface {
 	UpdateById(id uint64, newInfo model.Book) (model.Book, error)
 }
