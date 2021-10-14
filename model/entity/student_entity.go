@@ -2,6 +2,7 @@ package entity
 
 import (
 	"github.com/gin-backend-application/model"
+	"github.com/gin-backend-application/model/business_object"
 	"time"
 )
 
@@ -15,4 +16,18 @@ type StudentEntity struct {
 	Grade 		model.GradeType		`json:"grade"`
 	EnrollTime	time.Time			`json:"enroll_time"`
 	Graduated	bool				`json:"graduated"`
+}
+
+func (entity *StudentEntity) ToBO() business_object.StudentBO{
+	return business_object.StudentBO{
+		Id:         entity.Id,
+		StudentId:  entity.StudentId,
+		Password:   entity.Password,
+		Name:       entity.Name,
+		Gender:     entity.Gender,
+		Age:        entity.Age,
+		Grade:      entity.Grade,
+		EnrollTime: entity.EnrollTime,
+		Graduated:  entity.Graduated,
+	}
 }
