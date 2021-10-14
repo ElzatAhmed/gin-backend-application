@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/gin-backend-application/model"
 	"github.com/gin-backend-application/repository"
-	"github.com/gin-backend-application/repository/repo_implements"
 	"github.com/gin-backend-application/service"
 )
 
@@ -14,22 +13,23 @@ type bookInfoServiceImpl struct {
 	authorRepo repository.AuthorRepository
 }
 
-func NewBookInfoService() service.BookInfoService {
+func NewBookInfoService(authorRepo repository.AuthorRepository,
+	bookRepo repository.BookRepository) service.BookInfoService {
 	return &bookInfoServiceImpl{
-		bookRepo:   repo_implements.NewBookRepo(),
-		authorRepo: repo_implements.NewAuthorRepo(),
+		bookRepo:   bookRepo,
+		authorRepo: authorRepo,
 	}
 }
 
-func (b bookInfoServiceImpl) FindById(id uint64) (model.Book, error) {
+func (b *bookInfoServiceImpl) FindById(id uint64) (model.Book, error) {
 	return b.bookRepo.FindById(id)
 }
 
-func (b bookInfoServiceImpl) FindAllByName(name string) ([]model.Book, error) {
+func (b *bookInfoServiceImpl) FindAllByName(name string) ([]model.Book, error) {
 	return b.bookRepo.FindAllByName(name)
 }
 
-func (b bookInfoServiceImpl) FindAllByAuthorId(authorId uint64) ([]model.Book, error) {
+func (b *bookInfoServiceImpl) FindAllByAuthorId(authorId uint64) ([]model.Book, error) {
 	return b.bookRepo.FindAllByAuthorId(authorId)
 }
 

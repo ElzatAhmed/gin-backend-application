@@ -3,7 +3,6 @@ package author_service_implements
 import (
 	"github.com/gin-backend-application/model"
 	"github.com/gin-backend-application/repository"
-	"github.com/gin-backend-application/repository/repo_implements"
 	"github.com/gin-backend-application/service"
 )
 
@@ -11,9 +10,9 @@ type authorInfoServiceImpl struct {
 	authorRepo repository.AuthorRepository
 }
 
-func NewAuthorInfoService() service.AuthorInfoService {
+func NewAuthorInfoService(authorRepo repository.AuthorRepository) service.AuthorInfoService {
 	return &authorInfoServiceImpl{
-		authorRepo: repo_implements.NewAuthorRepo(),
+		authorRepo: authorRepo,
 	}
 }
 
