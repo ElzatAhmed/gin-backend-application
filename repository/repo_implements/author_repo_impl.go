@@ -1,24 +1,17 @@
-package repository
+package repo_implements
 
 import (
 	"errors"
 	"fmt"
 	"github.com/gin-backend-application/model"
+	"github.com/gin-backend-application/repository"
 )
 
-type AuthorRepository interface {
-	FindById(id uint64) (model.Author, error)
-	FindAllByName(name string) ([]model.Author, error)
-	UpdateById(id uint64, newInfo model.Author) (model.Author, error)
-	SaveNew(info model.Author) (model.Author, error)
-}
-
-// implementation
 type authorRepoImpl struct {
 	authors []*model.Author	// simulates the database
 }
 
-func NewAuthorRepo() AuthorRepository{
+func NewAuthorRepo() repository.AuthorRepository{
 	return &authorRepoImpl{}
 }
 
@@ -69,3 +62,4 @@ func (a *authorRepoImpl) findAuthorById(id uint64) (*model.Author, error){
 	}
 	return nil, errors.New(fmt.Sprintf("author with id %d not found", id))
 }
+

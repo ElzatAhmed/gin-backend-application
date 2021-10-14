@@ -1,20 +1,18 @@
-package repository
+package repo_implements
 
 import (
 	"errors"
 	"fmt"
 	"github.com/gin-backend-application/model"
+	"github.com/gin-backend-application/repository"
 )
-
-type BookRepository interface {
-	FindById(id uint64) (model.Book, error)
-	FindAllByName(name string) ([]model.Book,error)
-	UpdateById(id uint64, newInfo model.Book) (model.Book,error)
-	SaveNew(info model.Book) (model.Book,error)
-}
 
 type bookRepoImpl struct {
 	books []*model.Book
+}
+
+func NewBookRepo() repository.BookRepository {
+	return &bookRepoImpl{}
 }
 
 func (b *bookRepoImpl) FindById(id uint64) (model.Book,error) {
@@ -34,6 +32,19 @@ func (b *bookRepoImpl) FindAllByName(name string) ([]model.Book,error) {
 	}
 	if len(books) ==0{
 		return books, errors.New(fmt.Sprintf("book with name %s not found", name))
+	}
+	return books, nil
+}
+
+func (b *bookRepoImpl) FindAllByAuthorId(id uint64) ([]model.Book, error) {
+	var books []model.Book
+	for _, book := range b.books{
+		if book.AuthorId == id{
+			books = append(books, *book)
+		}
+	}
+	if len(books) == 0{
+		return books, errors.New(fmt.Sprintf("book with author id %d not found", id))
 	}
 	return books, nil
 }
@@ -65,4 +76,3 @@ func (b *bookRepoImpl) findBookById(id uint64) (*model.Book, error) {
 	}
 	return nil, errors.New(fmt.Sprintf("book with id %d not found", id))
 }
-
